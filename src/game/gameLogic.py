@@ -43,12 +43,12 @@ class GameLogic(BaseClass):
     def has_winner(self, dealer_value, hand:Hand) -> bool:        
             player_value = hand.get_value()
             """
-            Retorna uma lista com os jogadores que ganharam a rodada.
+            Returns a list of players who won the round.
 
-            Para um jogador ganhar, é necessário:
-            - O valor total da mão do jogador não pode ultrapassar 21 pontos.
-            - Se o valor total da mão do dealer ultrapassar 21 pontos ou o valor total da mão do jogador for maior do que o do dealer, o jogador vence.
-            - Se o jogador tiver exatamente duas cartas na mão e o valor total for 21, então ele fez um blackjack e vence, a menos que o dealer também tenha feito um blackjack.
+            For a player to win, the following conditions must be met:
+            - The total value of the player's hand must not exceed 21 points.
+            - If the total value of the dealer's hand exceeds 21 points or the total value of the player's hand is greater than the dealer's, the player wins.
+            - If the player has exactly two cards in the hand and the total value is 21, then they have a blackjack and win, unless the dealer also has a blackjack.
             """
             is_blackjack = hand.is_blackjack() and len(hand) == 2
             return player_value <= 21 and (dealer_value > 21 or player_value > dealer_value or is_blackjack and dealer_value != 21)
