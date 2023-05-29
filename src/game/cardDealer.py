@@ -25,8 +25,8 @@ class CardDealer(BaseClass):
     def distribute_cards_dealer(self):
         max_hand_value = max([hand.get_value() for player in self.__players for hand in player.get_hands() if hand.get_value() > 0 and hand.get_value() <= 21], default=0)
         cutoff_value = min(17, max_hand_value)
-        hands_over_21 = sum(1 for player in self.__players for hand in player.get_hands() if hand.get_value() > 0 and hand.get_value() > 21)
-        hands_below_21 = sum(1 for player in self.__players for hand in player.get_hands() if hand.get_value() > 0 and hand.get_value() <= 21)
+        #hands_over_21 = sum(1 for player in self.__players for hand in player.get_hands() if hand.get_value() > 0 and hand.get_value() > 21)
+        #hands_below_21 = sum(1 for player in self.__players for hand in player.get_hands() if hand.get_value() > 0 and hand.get_value() <= 21)
         
         dealer_winning_hands = 0
         
