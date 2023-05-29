@@ -45,6 +45,7 @@ class Deck(BaseClass):
 
     def reset_deck(self):
         self.__cards = self.__create_deck()
+        self.shuffle_deck()
         self.__card_iterator = iter(self.__cards)
 
     def get_cards(self)-> List[Card]:

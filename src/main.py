@@ -78,7 +78,7 @@ def main():
     # Inicia o jogo
     while True:
         retorno = game.start_game()
-        logger.print_logs()
+        logger.print_result_logs()
         
         if(retorno):
             answer = input("Deseja jogar novamente? (S/N) ")
