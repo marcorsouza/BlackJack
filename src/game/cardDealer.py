@@ -23,9 +23,21 @@ class CardDealer(BaseClass):
         self.show_cards() # Mostra as cartas dos jogadores e do dealer
     
     def distribute_cards_dealer(self):
-        # Dealer continua comprando cartas até atingir 17 pontos ou mais
-        while self.__dealer.my_hand_value() < 17:
+        max_hand_value = max([hand.get_value() for player in self.__players for hand in player.get_hands() if hand.get_value() > 0 and hand.get_value() <= 21], default=0)
+        cutoff_value = min(17, max_hand_value)
+        hands_over_21 = sum(1 for player in self.__players for hand in player.get_hands() if hand.get_value() > 0 and hand.get_value() > 21)
+        hands_below_21 = sum(1 for player in self.__players for hand in player.get_hands() if hand.get_value() > 0 and hand.get_value() <= 21)
+        
+        dealer_winning_hands = 0
+        
+        while self.__dealer.my_hand_value() < cutoff_value and dealer_winning_hands == 0:
             self.__dealer.deal_card(self.__dealer.get_player())
+            
+            dealer_winning_hands = sum(1 for player in self.__players for hand in player.get_hands() if hand.get_value() > 0 and hand.get_value() <= 21 and hand.get_value() < self.__dealer.my_hand_value())
+            dealer_losing_hands = sum(1 for player in self.__players for hand in player.get_hands() if hand.get_value() > 0 and hand.get_value() <= 21 and hand.get_value() > self.__dealer.my_hand_value())
+
+            self.logger.result_log(f"Dealer Winning Hands: {dealer_winning_hands}")
+            self.logger.result_log(f"Dealer Losing Hands: {dealer_losing_hands}")        
             
     def __deal_additional_cards(self, player:Participant):
                    

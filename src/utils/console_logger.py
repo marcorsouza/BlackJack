@@ -41,5 +41,6 @@ class ConsoleLogger:
     
     @staticmethod
     def print_result_logs():
+        print("#### Logs ####")
         for log in ConsoleLogger.get_result_logs():
             print(log)
